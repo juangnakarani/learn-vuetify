@@ -1,92 +1,58 @@
 <template>
-  <v-app light>
+  <v-app id="inspire" dark>
     <v-navigation-drawer
+      clipped
       persistent
-      :mini-variant="miniVariant"
-      :clipped="clipped"
       v-model="drawer"
       enable-resize-watcher
       app
     >
-      <v-list>
-        <v-list-tile 
-          v-for="(item, i) in items"
-          :key="i"
-          value="true"
-        >
+      <v-list dense>
+        <v-list-tile @click="">
           <v-list-tile-action>
-            <v-icon light v-html="item.icon"></v-icon>
+            <v-icon>dashboard</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"></v-list-tile-title>
+            <v-list-tile-title>Dashboard</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="">
+          <v-list-tile-action>
+            <v-icon>settings</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Settings</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="">
+          <v-list-tile-action>
+            <v-icon>android</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Login</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed app>
+    <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-btn 
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>remove</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>menu</v-icon>
-      </v-btn>
+      <v-toolbar-title>Application</v-toolbar-title>
     </v-toolbar>
     <main>
       <v-content>
-        <v-container fluid>
-          <v-slide-y-transition mode="out-in">
-            <v-layout column align-center>
-              <img src="/public/v.png" alt="Vuetify.js" class="mb-5" />
-              <blockquote>
-                &#8220;First, solve the problem. Then, write the code.&#8221;
-                <footer>
-                  <small>
-                    <em>&mdash;John Johnson</em>
-                  </small>
-                </footer>
-              </blockquote>
-            </v-layout>
-          </v-slide-y-transition>
+        <v-container fluid fill-height>
+          <v-layout justify-center align-center>
+            <v-tooltip right>
+              <v-btn icon large :href="source" target="_blank" slot="activator">
+                <v-icon large>code</v-icon>
+              </v-btn>
+              <span>Source</span>
+            </v-tooltip>
+          </v-layout>
         </v-container>
       </v-content>
     </main>
-    <v-navigation-drawer
-      temporary
-      :right="right"
-      v-model="rightDrawer"
-      app
-    >
-      <v-list>
-        <v-list-tile @click.native="right = !right">
-          <v-list-tile-action>
-            <v-icon light>compare_arrows</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :fixed="fixed" app>
+    <v-footer app fixed>
       <span>&copy; 2017</span>
     </v-footer>
   </v-app>
@@ -94,19 +60,11 @@
 
 <script>
   export default {
-    data () {
-      return {
-        clipped: false,
-        drawer: true,
-        fixed: false,
-        items: [
-          { icon: 'bubble_chart', title: 'Inspire' }
-        ],
-        miniVariant: false,
-        right: true,
-        rightDrawer: false,
-        title: 'Vuetify.js'
-      }
+    data: () => ({
+      drawer: true
+    }),
+    props: {
+      source: String
     }
   }
 </script>
