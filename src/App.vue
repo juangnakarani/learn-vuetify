@@ -26,7 +26,7 @@
             <v-list-tile-title>Admin</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="admin">
+        <v-list-tile @click="addperson">
           <v-list-tile-action>
             <v-icon>person_add</v-icon>
           </v-list-tile-action>
@@ -34,12 +34,20 @@
             <v-list-tile-title>Add Person</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="admin">
+        <v-list-tile @click="listpersons">
           <v-list-tile-action>
             <v-icon>people</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>List Person</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="listpersons">
+          <v-list-tile-action>
+            <v-icon>file_upload</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Upload Persons</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
 
@@ -81,6 +89,12 @@ export default {
     },
     admin: function() {
       router.push({ path: '/admin' })
+    },
+    addperson: function() {
+      router.push({ path: '/addperson' })
+    },
+    listpersons: function() {
+      router.push({ path: '/listpersons' })
     }
   },
   props: {
