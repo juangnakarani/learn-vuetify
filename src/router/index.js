@@ -4,8 +4,9 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import Guest from '@/components/Guest'
 import Admin from '@/components/Admin'
-import AddPerson from '@/components/AddPerson'
+import Register from '@/components/Register'
 import ListPersons from '@/components/ListPersons'
+import UploadPersons from '@/components/UploadPersons'
 
 Vue.use(Vuetify)
 Vue.use(Router)
@@ -28,14 +29,19 @@ export default new Router({
       component: Admin
     },
     {
-      path: '/addperson',
-      name: 'AddPerson',
-      component: AddPerson
+      path: '/register',
+      name: 'Register',
+      component: Register
     },
     {
       path: '/listpersons',
       name: 'ListPersons',
       component: ListPersons
+    },
+    {
+      path: '/upload',
+      name: 'UploadPersons',
+      component: UploadPersons
     }
   ]
 })

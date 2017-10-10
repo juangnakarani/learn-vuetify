@@ -1,7 +1,7 @@
 <template>
     <v-container fuild>
         <v-layout justify-center align-content-center>
-                <img src='../assets/admin.png' />
+                <img src='../assets/guest.png' />
         </v-layout>
         <v-layout justify-center>
             <v-card color="pink" dark>
@@ -15,7 +15,7 @@
 <script>
   export default {
     data: () => ({
-      lorem: `welcome to admin page. Protected Endpoints`
+      lorem: `Welcome to admin page. This page will be protected endpoints`
     })
   }
 </script>

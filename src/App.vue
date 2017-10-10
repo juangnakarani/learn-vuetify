@@ -26,12 +26,12 @@
             <v-list-tile-title>Admin</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="addperson">
+        <v-list-tile @click="register">
           <v-list-tile-action>
             <v-icon>person_add</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Add Person</v-list-tile-title>
+            <v-list-tile-title>Register</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile @click="listpersons">
@@ -42,20 +42,21 @@
             <v-list-tile-title>List Person</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="listpersons">
+        <v-list-tile @click="upload">
           <v-list-tile-action>
             <v-icon>file_upload</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Upload Persons</v-list-tile-title>
+            <v-list-tile-title>Upload</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-
       </v-list>
     </v-navigation-drawer>
     <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Ayo rek belajar vuetifyjs!</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn outline color="teal" @click="register">Register now</v-btn>
     </v-toolbar>
     <main>
       <v-content>
@@ -69,7 +70,7 @@
       </v-content>
     </main>
     <v-footer app fixed>
-      <span>&copy; 2017</span>
+      <span>&copy; 2017 juang.nakarani</span>
     </v-footer>
   </v-app>
 </template>
@@ -90,11 +91,14 @@ export default {
     admin: function() {
       router.push({ path: '/admin' })
     },
-    addperson: function() {
-      router.push({ path: '/addperson' })
+    register: function() {
+      router.push({ path: '/register' })
     },
     listpersons: function() {
       router.push({ path: '/listpersons' })
+    },
+    upload: function() {
+      router.push({ path: '/upload' })
     }
   },
   props: {

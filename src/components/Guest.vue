@@ -16,7 +16,7 @@
 <script>
   export default {
     data: () => ({
-      lorem: `Welcome to guest page. Non-Protected Endpoint(s)`
+      lorem: `Welcome to guest page. This page is non-protected endpoint(s)`
     })
   }
 </script>
