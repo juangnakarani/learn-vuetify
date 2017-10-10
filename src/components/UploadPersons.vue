@@ -5,7 +5,7 @@
                         <v-subheader>Normal with hint text</v-subheader>
                     </v-flex> -->
             <v-flex xs12 sm5>
-                <v-text-field name="input-1-3" label="Hint Text" single-line prepend-icon="attachment"></v-text-field>
+                <v-text-field name="input-1-3" label="this is file location" single-line prepend-icon="attachment"></v-text-field>
             </v-flex>
             <v-flex xs12 sm3>
                 <v-btn :loading="loading3" @click.native="loader = 'loading3'" :disabled="loading3" color="blue-grey" dark>

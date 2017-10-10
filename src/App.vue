@@ -54,7 +54,7 @@
     </v-navigation-drawer>
     <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Ayo rek belajar vuetifyjs!</v-toolbar-title>
+      <v-toolbar-title>Ayo rek belajar Vuetify!</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn outline color="teal" @click="register">Register now</v-btn>
     </v-toolbar>

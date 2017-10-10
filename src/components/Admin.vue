@@ -4,7 +4,7 @@
                 <img src='../assets/guest.png' />
         </v-layout>
         <v-layout justify-center>
-            <v-card color="pink" dark>
+            <v-card color="red" dark>
               <v-card-text 
               v-text="lorem">
               </v-card-text>
