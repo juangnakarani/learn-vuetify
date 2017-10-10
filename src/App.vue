@@ -10,20 +10,36 @@
             <v-list-tile-title>Login</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="">
+        <v-list-tile @click="guest">
           <v-list-tile-action>
-            <v-icon>face</v-icon>
+            <v-icon>person</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Guest</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="">
+        <v-list-tile @click="admin">
           <v-list-tile-action>
             <v-icon>settings</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Admin</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="admin">
+          <v-list-tile-action>
+            <v-icon>person_add</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Add Person</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="admin">
+          <v-list-tile-action>
+            <v-icon>people</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>List Person</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
 
@@ -37,9 +53,9 @@
       <v-content>
         <v-container fluid fill-height>
           <!-- <v-layout justify-center align-center> -->
-            <router-view>
-               <v-container fluid fill-height></v-container>
-            </router-view>
+          <router-view>
+            <v-container fluid fill-height></v-container>
+          </router-view>
           <!-- </v-layout> -->
         </v-container>
       </v-content>
@@ -59,6 +75,12 @@ export default {
   methods: {
     login: function() {
       router.push({ path: '/' })
+    },
+    guest: function() {
+      router.push({ path: '/guest' })
+    },
+    admin: function() {
+      router.push({ path: '/admin' })
     }
   },
   props: {

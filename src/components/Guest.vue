@@ -1,7 +1,11 @@
 <template>
     <v-container fuild>
+         <v-layout justify-center align-content-center>
+                <img src='../assets/guest.png' />
+        </v-layout>
         <v-layout justify-center>
-            <v-card color="indigo" dark>
+            
+            <v-card color="green" dark>
               <v-card-text 
               v-text="lorem">
               </v-card-text>
@@ -12,7 +16,7 @@
 <script>
   export default {
     data: () => ({
-      lorem: `welcome to guest page. Please login to access admin page..`
+      lorem: `Welcome to guest page. Non-Protected Endpoint(s)`
     })
   }
 </script>
