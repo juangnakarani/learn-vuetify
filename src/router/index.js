@@ -7,6 +7,7 @@ import Admin from '@/components/Admin'
 import Register from '@/components/Register'
 import ListPersons from '@/components/ListPersons'
 import UploadPersons from '@/components/UploadPersons'
+import Download from '@/components/Download'
 
 Vue.use(Vuetify)
 Vue.use(Router)
@@ -42,6 +43,11 @@ export default new Router({
       path: '/upload',
       name: 'UploadPersons',
       component: UploadPersons
+    },
+    {
+      path: '/download',
+      name: 'Download',
+      component: Download
     }
   ]
 })

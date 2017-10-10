@@ -50,6 +50,14 @@
             <v-list-tile-title>Upload</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile @click="download">
+          <v-list-tile-action>
+            <v-icon>file_download</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Download</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar app fixed clipped-left>
@@ -99,6 +107,9 @@ export default {
     },
     upload: function() {
       router.push({ path: '/upload' })
+    },
+    download: function() {
+      router.push({ path: '/download' })
     }
   },
   props: {

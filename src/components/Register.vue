@@ -7,22 +7,22 @@
                         <v-card-text>
                             <v-layout row wrap>
                                 <v-flex lg6 sm6>
-                                    <v-text-field label="First Name" v-model="name" :rules="nameRules" :counter="10" required></v-text-field>
+                                    <v-text-field label="First Name" v-model="firstname" :counter="10" required></v-text-field>
                                 </v-flex>
                                 <v-flex lg6 sm6>
-                                    <v-text-field label="Last Name" v-model="name" :rules="nameRules" :counter="10" required></v-text-field>
+                                    <v-text-field label="Last Name" v-model="lastname" :counter="10" required></v-text-field>
                                 </v-flex>
                                 <v-flex lg6 sm6>
-                                    <v-text-field label="Username" v-model="name" :rules="nameRules" required></v-text-field>
+                                    <v-text-field label="Username" v-model="username" required></v-text-field>
                                 </v-flex>
                                 <v-flex lg6 sm6>
                                     <v-spacer></v-spacer>
                                 </v-flex>
                                 <v-flex lg6 sm6>
-                                    <v-text-field label="Password" v-model="name" :rules="nameRules" required></v-text-field>
+                                    <v-text-field name="input-passwd" label="Password" v-model="password" :type="isPassword ? 'password' : 'text'" :append-icon="isPassword ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (isPassword = !isPassword)" :rules="nameRules" required></v-text-field>
                                 </v-flex>
                                 <v-flex lg6 sm6>
-                                    <v-text-field label="Confirm Password" v-model="name" :rules="nameRules" required></v-text-field>
+                                    <v-text-field name="confirm-passwd" label="Confirm Password" v-model="cfrmPassword" :type="isCPassword ? 'password' : 'text'" :append-icon="isCPassword ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (isCPassword = !isCPassword)" required></v-text-field>
                                 </v-flex>
                                 <v-flex lg6 sm6>
                                     <v-text-field label="E-mail" v-model="email" :rules="emailRules" required></v-text-field>
@@ -31,25 +31,25 @@
                                     <v-spacer></v-spacer>
                                 </v-flex>
                                 <v-flex lg6 sm6>
-                                    <v-select label="Language" v-model="language" v-bind:items="languages" :rules="emailRules" required></v-select>
+                                    <v-select autocomplete label="Language" v-model="language" v-bind:items="languages" required></v-select>
                                 </v-flex>
                                 <v-flex lg6 sm6>
                                     <v-spacer></v-spacer>
                                 </v-flex>
                                 <v-flex lg6 sm6>
-                                    <v-text-field label="Phone" v-model="email" :rules="emailRules" required></v-text-field>
+                                    <v-text-field label="Phone" v-model="phone" required></v-text-field>
                                 </v-flex>
                                 <v-flex lg6 sm6>
                                     <v-spacer></v-spacer>
                                 </v-flex>
                                 <v-flex lg4 sm4>
-                                    <v-select label="Gender" v-model="gender" :items="genders" :rules="emailRules"></v-select>
+                                    <v-select label="Gender" v-model="gender" :items="genders"></v-select>
                                 </v-flex>
                                 <v-flex lg8 sm8>
                                     <v-spacer></v-spacer>
                                 </v-flex>
                                 <v-flex lg4 sm4>
-                                    <v-select label="Location" v-model="location" v-bind:items="locations" :rules="emailRules" required></v-select>
+                                    <v-select autocomplete label="Location" v-model="location" v-bind:items="locations" required></v-select>
                                 </v-flex>
                                 <v-flex lg8 sm8>
                                     <v-spacer></v-spacer>
@@ -68,6 +68,9 @@
 export default {
     data: () => ({
         lorem: `Add Persons Protected Endpoints`,
+        firstname: ``,
+        lastname: ``,
+        username: ``,
         language: ``,
         languages: [
             'Java', 'Golang', 'Python', 'C#', 'Ruby', 'JavaScript', 'Perl'
@@ -79,7 +82,19 @@ export default {
         gender: ``,
         genders: [
             'Male', 'Female', 'Other', 'Rather not Say'
-        ]
+        ],
+        isPassword: true,
+        password: ``,
+        isCPassword: true,
+        cfrmPassword: ``,
+        email: '',
+        emailRules: [
+            v => {
+                return !!v || 'E-mail is required'
+            },
+            v => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+        ],
+        phone: ``
     })
 }
 </script>

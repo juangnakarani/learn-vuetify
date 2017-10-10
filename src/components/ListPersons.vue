@@ -12,7 +12,7 @@
         </v-flex>
         <v-card>
             <v-card-title>
-                Nutrition
+                Person
                 <v-spacer></v-spacer>
                 <v-text-field append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>
             </v-card-title>
@@ -55,18 +55,18 @@ export default {
         pagination: {},
         headers: [
           {
-            text: 'Dessert (100g serving)',
+            text: 'Username',
             align: 'left',
             sortable: false,
             value: 'name'
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Sodium (mg)', value: 'sodium' },
-          { text: 'Calcium (%)', value: 'calcium' },
-          { text: 'Iron (%)', value: 'iron' }
+          { text: 'First Name', value: 'calories' },
+          { text: 'Last Name', value: 'fat' },
+          { text: 'Email', value: 'carbs' },
+          { text: 'Language', value: 'protein' },
+          { text: 'Phone', value: 'sodium' },
+          { text: 'Gender', value: 'calcium' },
+          { text: 'Location', value: 'iron' }
         ],
         items: [
           {
