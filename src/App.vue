@@ -1,10 +1,10 @@
 <template>
   <v-app id="inspire" light>
-    <v-navigation-drawer clipped persistent v-model="drawer" enable-resize-watcher app>
+    <v-navigation-drawer app clipped v-model="drawer" width="200" temporary dark>
       <v-list dense>
-        <v-list-tile @click="">
+        <v-list-tile @click="login">
           <v-list-tile-action>
-            <v-icon>android</v-icon>
+            <v-icon>lock</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Login</v-list-tile-title>
@@ -12,10 +12,10 @@
         </v-list-tile>
         <v-list-tile @click="">
           <v-list-tile-action>
-            <v-icon>dashboard</v-icon>
+            <v-icon>face</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Dashboard</v-list-tile-title>
+            <v-list-tile-title>Guest</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile @click="">
@@ -23,7 +23,7 @@
             <v-icon>settings</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Settings</v-list-tile-title>
+            <v-list-tile-title>Admin</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
 
@@ -36,9 +36,11 @@
     <main>
       <v-content>
         <v-container fluid fill-height>
-          <v-layout justify-center align-center>
-            <router-view></router-view>
-          </v-layout>
+          <!-- <v-layout justify-center align-center> -->
+            <router-view>
+               <v-container fluid fill-height></v-container>
+            </router-view>
+          <!-- </v-layout> -->
         </v-container>
       </v-content>
     </main>
@@ -49,13 +51,14 @@
 </template>
 
 <script>
+import router from '@/router/index.js'
 export default {
   data: () => ({
-    drawer: true
+    drawer: false
   }),
   methods: {
     login: function() {
-
+      router.push({ path: '/' })
     }
   },
   props: {
