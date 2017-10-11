@@ -2,9 +2,9 @@
   <v-app id="inspire" light>
     <v-navigation-drawer app clipped v-model="drawer" width="200" temporary dark>
       <v-list dense>
-        <v-list-tile v-if="islogin" @click="goToLoginOut">
+        <v-list-tile v-if="islogin" @click.native.stop="dialog = true">
           <v-list-tile-action>
-            <v-icon>lock_outline  </v-icon>
+            <v-icon>lock_outline </v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Logout</v-list-tile-title>
@@ -82,6 +82,19 @@
             <v-container fluid fill-height></v-container>
           </router-view>
           <!-- </v-layout> -->
+          <!-- ini dialog -->
+          <v-dialog v-model="dialog">
+            <v-card>
+              <v-card-title class="headline">Apakah Anda benar ingin logout?</v-card-title>
+              <v-card-text>Dalam proses logout ini state di vuex akan dikosong kan.</v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="green" flat="flat" @click.native="goToLoginOut">Yes</v-btn>
+                <v-btn color="red" flat="flat" @click.native="dialog = false">No</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <!-- ini dialog -->
         </v-container>
       </v-content>
     </main>
@@ -96,7 +109,8 @@ import store from './vuex/store.js'
 import router from '@/router/index.js'
 export default {
   data: () => ({
-    drawer: false
+    drawer: false,
+    dialog: false
   }),
   store,
   computed: {
@@ -131,6 +145,7 @@ export default {
         this.$store.commit('changeToken', '')
         this.$store.commit('setIsAuth', false)
         this.$store.commit('setIsLogin', false)
+        this.dialog = false
 
       }
       router.push({ path: '/' })
