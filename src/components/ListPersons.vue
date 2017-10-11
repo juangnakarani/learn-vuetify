@@ -1,8 +1,8 @@
 <template>
     <v-container fuild>
         <!-- <v-layout justify-center align-content-center>
-                        <img src='../assets/guest.png' />
-                </v-layout> -->
+                            <img src='../assets/guest.png' />
+                    </v-layout> -->
         <!-- <v-layout justify-center> -->
         <v-flex xs12>
             <v-card color="green" dark>
@@ -19,16 +19,18 @@
             <v-data-table v-bind:headers="headers" v-bind:items="items" v-bind:search="search">
                 <template slot="items" scope="props">
                     <td>
-                        <v-edit-dialog lazy> {{ props.item.name }}
+                        <v-edit-dialog lazy> {{ props.item.username }}
                             <v-text-field slot="input" label="Edit" v-model="props.item.name" single-line counter :rules="[max25chars]"></v-text-field>
                         </v-edit-dialog>
                     </td>
-                    <td class="text-xs-right">{{ props.item.calories }}</td>
-                    <td class="text-xs-right">{{ props.item.fat }}</td>
-                    <td class="text-xs-right">{{ props.item.carbs }}</td>
-                    <td class="text-xs-right">{{ props.item.protein }}</td>
-                    <td class="text-xs-right">{{ props.item.sodium }}</td>
-                    <td class="text-xs-right">{{ props.item.calcium }}</td>
+                    
+                    <td class="text-xs-right">{{ props.item.firstname }}</td>
+                    <td class="text-xs-right">{{ props.item.lastname }}</td>
+                    <td class="text-xs-right">{{ props.item.email }}</td>
+                    <td class="text-xs-right">{{ props.item.language }}</td>
+                    <td class="text-xs-right">{{ props.item.phone }}</td>
+                    <td class="text-xs-right">{{ props.item.gender }}</td>
+                    <td class="text-xs-right">{{ props.item.location }}</td>
                     <td class="text-xs-right">
                         <v-edit-dialog @open="tmp = props.item.iron" @save="props.item.iron = tmp || props.item.iron" large lazy>
                             <div>{{ props.item.iron }}</div>
@@ -46,6 +48,8 @@
     </v-container>
 </template>
 <script>
+import { HTTP } from '@/router/index'
+
 export default {
     data: () => ({
         lorem: `List persons Non-Protected Endpoint(s)`,
@@ -54,21 +58,38 @@ export default {
         search: '',
         pagination: {},
         headers: [
-          {
-            text: 'Username',
-            align: 'left',
-            sortable: false,
-            value: 'name'
-          },
-          { text: 'First Name', value: 'calories' },
-          { text: 'Last Name', value: 'fat' },
-          { text: 'Email', value: 'carbs' },
-          { text: 'Language', value: 'protein' },
-          { text: 'Phone', value: 'sodium' },
-          { text: 'Gender', value: 'calcium' },
-          { text: 'Location', value: 'iron' }
+            {
+                text: 'Username',
+                align: 'left',
+                sortable: false,
+                value: 'name'
+            },
+            { text: 'First Name', value: 'calories' },
+            { text: 'Last Name', value: 'fat' },
+            { text: 'Email', value: 'carbs' },
+            { text: 'Language', value: 'protein' },
+            { text: 'Phone', value: 'sodium' },
+            { text: 'Gender', value: 'calcium' },
+            { text: 'Location', value: 'iron' }
         ],
         items: []
-    })
+    }),
+    created: function() {
+        HTTP.get(`/getpersons`, {
+            withCredentials: false,
+            timeout: 1000,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                // JSON responses are automatically parsed.
+                console.log(response)
+                this.items = response.data
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
 }
 </script>
