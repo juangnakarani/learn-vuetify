@@ -2,7 +2,7 @@
   <v-app id="inspire" light>
     <v-navigation-drawer app clipped v-model="drawer" width="200" temporary dark>
       <v-list dense>
-        <v-list-tile v-if="islogin" @click.native.stop="dialog = true">
+        <v-list-tile v-if="islogin" @click="dialog = true">
           <v-list-tile-action>
             <v-icon>lock_outline </v-icon>
           </v-list-tile-action>
@@ -90,7 +90,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="green" flat="flat" @click.native="goToLoginOut">Yes</v-btn>
-                <v-btn color="red" flat="flat" @click.native="dialog = false">No</v-btn>
+                <v-btn color="grey" flat="flat" @click.native="dialog = false">No</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>

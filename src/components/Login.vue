@@ -11,9 +11,9 @@
              <!-- </v-flex> -->
             <!-- <v-spacer></v-spacer> -->
             <v-flex lg3 sm3 xs3>
-            <v-form v-model="valid" ref="form" lazy-validation>
-                <v-text-field label="Username" v-model="username" required></v-text-field>
-                <v-text-field name="input-passwd" label="Password" v-model="password" :type="isPassword ? 'password' : 'text'" :append-icon="isPassword ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (isPassword = !isPassword)" required></v-text-field>
+            <v-form ref="form" lazy-validation>
+                <v-text-field label="Username" v-model="username" required :error="isErrorUsr" @focus="clearErrUsr"></v-text-field>
+                <v-text-field name="input-passwd" label="Password" v-model="password" :error="isErrorPasswd" @focus="clearErrPasswd" :type="isPassword ? 'password' : 'text'" :append-icon="isPassword ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (isPassword = !isPassword)" required></v-text-field>
                 <v-btn color="primary" @click="getToken" :disabled="false">Login</v-btn>
             </v-form>
             </v-flex>
@@ -32,7 +32,8 @@ export default {
             username: '',
             password: '',
             isPassword: true,
-            valid: true
+            isErrorUsr: false,
+            isErrorPasswd: false
         }
     }, 
     store,
@@ -40,6 +41,13 @@ export default {
         changeTkn: function(event) {
             this.$store.commit('changeToken', event.target.value)
         },
+        clearErrUsr: function(){
+            this.isErrorUsr = false
+        },
+        clearErrPasswd: function(){
+            this.isErrorPasswd = false
+        }
+        ,
         getToken: function() {
             let username = this.username
             let password = this.password
@@ -59,6 +67,8 @@ export default {
                 })
                 .catch(e => {
                     console.log(e)
+                    this.isErrorUsr = true
+                    this.isErrorPasswd = true
                 })
         }
     }
