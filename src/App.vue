@@ -2,7 +2,15 @@
   <v-app id="inspire" light>
     <v-navigation-drawer app clipped v-model="drawer" width="200" temporary dark>
       <v-list dense>
-        <v-list-tile @click="login">
+        <v-list-tile v-if="islogin" @click="goToLoginOut">
+          <v-list-tile-action>
+            <v-icon>lock_outline  </v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Logout</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile v-else @click="goToLoginOut">
           <v-list-tile-action>
             <v-icon>lock_open</v-icon>
           </v-list-tile-action>
@@ -91,6 +99,11 @@ export default {
     drawer: false
   }),
   store,
+  computed: {
+    islogin: function() {
+      return this.$store.getters.getIsLogin
+    }
+  },
   methods: {
     login: function() {
       router.push({ path: '/' })
@@ -112,6 +125,16 @@ export default {
     },
     download: function() {
       router.push({ path: '/download' })
+    },
+    goToLoginOut: function() {
+      if (this.islogin == true) {
+        this.$store.commit('changeToken', '')
+        this.$store.commit('setIsAuth', false)
+        this.$store.commit('setIsLogin', false)
+
+      }
+      router.push({ path: '/' })
+
     }
   },
   props: {

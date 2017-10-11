@@ -17,7 +17,7 @@ import { HTTP } from '@/router/index'
 
 export default {
   data: () => ({
-    lorem: `Welcome to admin page. This page will be protected endpoints`
+    lorem: `Welcome to admin page. This page is protected endpoints`
   }),
   computed: {
     token: function() {
@@ -37,7 +37,9 @@ export default {
     console.log('login di admin:' + this.islogin)
     // TODO check is auth == true
     if (this.isauth != true) {
-      router.push({ path: '/401' })
+      // router.push({ name: 'user', params: { userId: 123 }})
+      router.push({ name: 'ErrorPage', params: {errnum:401}})
+
     } else {
       // TODO make request and check result for handle 401
       HTTP.get(`/admin`, {

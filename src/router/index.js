@@ -9,7 +9,7 @@ import Register from '@/components/Register'
 import ListPersons from '@/components/ListPersons'
 import UploadPersons from '@/components/UploadPersons'
 import Download from '@/components/Download'
-import PageNotFound from '@/components/PageNotFound'
+import ErrorPage from '@/components/ErrorPage'
 
 Vue.use(Vuetify)
 Vue.use(Router)
@@ -52,9 +52,10 @@ export default new Router({
       component: Download
     },
     {
-      path: '*',
-      name: 'PageNotFound',
-      component: PageNotFound
+      path: '/error/:errnum',
+      name: 'ErrorPage',
+      component: ErrorPage,
+      props: true
     }
   ]
 })
