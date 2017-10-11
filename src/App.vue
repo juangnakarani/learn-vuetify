@@ -84,11 +84,13 @@
 </template>
 
 <script>
+import store from './vuex/store.js'
 import router from '@/router/index.js'
 export default {
   data: () => ({
     drawer: false
   }),
+  store,
   methods: {
     login: function() {
       router.push({ path: '/' })

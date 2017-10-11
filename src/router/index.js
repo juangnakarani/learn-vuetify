@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import Router from 'vue-router'
+import axios from 'axios'
 import Login from '@/components/Login'
 import Guest from '@/components/Guest'
 import Settings from '@/components/Settings'
@@ -56,4 +57,13 @@ export default new Router({
       component: PageNotFound
     }
   ]
+})
+
+export const HTTP = axios.create({
+  baseURL: `http://192.168.1.12:8090`,
+  withCredentials: false,
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
 })
