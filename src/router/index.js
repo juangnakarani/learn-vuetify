@@ -3,11 +3,12 @@ import Vuetify from 'vuetify'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import Guest from '@/components/Guest'
-import Admin from '@/components/Admin'
+import Settings from '@/components/Settings'
 import Register from '@/components/Register'
 import ListPersons from '@/components/ListPersons'
 import UploadPersons from '@/components/UploadPersons'
 import Download from '@/components/Download'
+import PageNotFound from '@/components/PageNotFound'
 
 Vue.use(Vuetify)
 Vue.use(Router)
@@ -25,9 +26,9 @@ export default new Router({
       component: Guest
     },
     {
-      path: '/admin',
-      name: 'Admin',
-      component: Admin
+      path: '/settings',
+      name: 'Settings',
+      component: Settings
     },
     {
       path: '/register',
@@ -48,6 +49,11 @@ export default new Router({
       path: '/download',
       name: 'Download',
       component: Download
+    },
+    {
+      path: '*',
+      name: 'PageNotFound',
+      component: PageNotFound
     }
   ]
 })

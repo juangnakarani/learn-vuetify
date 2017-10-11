@@ -3,7 +3,7 @@
         <v-layout justify-center align-content-center>
             <v-flex lg4 sm4>
                 <v-form v-model="valid">
-                    <v-card color="grey lighten-4" flat>
+                    <v-card color="grey lighten-3" flat>
                         <v-card-text>
                             <v-layout row wrap>
                                 <v-flex lg6 sm6>
