@@ -1,19 +1,23 @@
 <template>
     <v-container grid-list-md>
+        <v-snackbar :top="y === 'top'" :timeout="timeout" :color="color" :multi-line="mode === 'multi-line'" :vertical="mode === 'vertical'" v-model="snackbar">
+            {{ text }}
+            <v-btn dark flat @click.native="snackbar = false">OK</v-btn>
+        </v-snackbar>
         <v-layout justify-center align-content-center>
             <v-flex lg4 sm4>
-                <v-form>
+                <v-form v-model="valid" ref="form" lazy-validation>
                     <v-card color="grey lighten-3" flat>
                         <v-card-text>
                             <v-layout row wrap>
                                 <v-flex lg6 sm6>
-                                    <v-text-field label="First Name" v-model="firstname" :counter="10" required></v-text-field>
+                                    <v-text-field label="First Name" v-model="firstname" :counter="10" :rules="firstnameRules" required></v-text-field>
                                 </v-flex>
                                 <v-flex lg6 sm6>
-                                    <v-text-field label="Last Name" v-model="lastname" :counter="10" required></v-text-field>
+                                    <v-text-field label="Last Name" v-model="lastname" :counter="10" :rules="lastnameRules" required></v-text-field>
                                 </v-flex>
                                 <v-flex lg6 sm6>
-                                    <v-text-field label="Username" v-model="username" required></v-text-field>
+                                    <v-text-field label="Username" v-model="username" :rules="usernameRules" required></v-text-field>
                                 </v-flex>
                                 <v-flex lg6 sm6>
                                     <v-spacer></v-spacer>
@@ -31,13 +35,13 @@
                                     <v-spacer></v-spacer>
                                 </v-flex>
                                 <v-flex lg6 sm6>
-                                    <v-select autocomplete label="Language" v-model="language" v-bind:items="languages" required></v-select>
+                                    <v-select autocomplete label="Language" v-model="language" v-bind:items="languages" :rules="languageRules" required></v-select>
                                 </v-flex>
                                 <v-flex lg6 sm6>
                                     <v-spacer></v-spacer>
                                 </v-flex>
                                 <v-flex lg6 sm6>
-                                    <v-text-field label="Phone" v-model="phone" required></v-text-field>
+                                    <v-text-field label="Phone" v-model="phone" :rules="phoneRules" required></v-text-field>
                                 </v-flex>
                                 <v-flex lg6 sm6>
                                     <v-spacer></v-spacer>
@@ -49,7 +53,7 @@
                                     <v-spacer></v-spacer>
                                 </v-flex>
                                 <v-flex lg4 sm4>
-                                    <v-select autocomplete label="Location" v-model="location" v-bind:items="locations" required></v-select>
+                                    <v-select autocomplete label="Location" v-model="location" v-bind:items="locations" :rules="locationRules" required></v-select>
                                 </v-flex>
                                 <v-flex lg8 sm8>
                                     <v-spacer></v-spacer>
@@ -69,17 +73,33 @@ import { HTTP } from '@/router/index'
 
 export default {
     data: () => ({
-        lorem: `Add Persons Protected Endpoints`,
+        valid: true,
+        textcard: `Add Persons Protected Endpoints`,
         firstname: ``,
+        firstnameRules: [
+            v => !!v || 'Firstname is required'
+        ],
         lastname: ``,
+        lastnameRules: [
+            v => !!v || 'Lastname is required'
+        ],
         username: ``,
+        usernameRules: [
+            v => !!v || 'Username is required'
+        ],
         language: ``,
         languages: [
             'Java', 'Golang', 'Python', 'C#', 'Ruby', 'JavaScript', 'Perl'
         ],
+        languageRules: [
+            v => !!v || 'Username is required'
+        ],
         location: ``,
         locations: [
             'Indonesia', 'Malaysia', 'Singapore', 'Japan', 'China'
+        ],
+        locationRules: [
+            v => !!v || 'Firstname is required'
         ],
         gender: ``,
         genders: [
@@ -96,13 +116,22 @@ export default {
             },
             v => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
         ],
-        phone: ``
+        phone: ``,
+        phoneRules: [
+            v => !!v || 'Username is required'
+        ],
+        snackbar: false,
+        y: 'top',
+        color: 'red',
+        mode: '',
+        timeout: 6000,
+        text: 'Ups.. please check the incorrect input..!'
     }),
     computed: {
-        fixphone: function(){
-            if(this.phone==""){
+        fixphone: function() {
+            if (this.phone == "") {
                 return null
-            }else{
+            } else {
                 return this.phone
             }
         }
@@ -110,35 +139,33 @@ export default {
     ,
     methods: {
         register: function() {
-            let register = {
-                'username': this.username,
-                'firstname': this.firstname,
-                'lastname': this.lastname,
-                'language': this.language,
-                'phone': this.fixphone,
-                'email': this.email,
-                'gender': this.gender,
-                'location': this.location,
-                'password': this.password
-            }
+            if (this.$refs.form.validate()) {
+                let register = {
+                    'username': this.username,
+                    'firstname': this.firstname,
+                    'lastname': this.lastname,
+                    'language': this.language,
+                    'phone': this.fixphone,
+                    'email': this.email,
+                    'gender': this.gender,
+                    'location': this.location,
+                    'password': this.password
+                }
 
-            HTTP.post(`/registration`, register)
-                .then(response => {
-                    // JSON responses are automatically parsed.
-                    console.log(response.status)
-                    console.log(response.data.token)
-                    // if (response.status = 200) {
-                    //     this.$store.commit('changeToken', response.data.token)
-                    //     this.$store.commit('setIsAuth', true)
-                    //     this.$store.commit('setIsLogin', true)
-                    //     router.push({ path: '/settings' })
-                    // }
-                })
-                .catch(e => {
-                    console.log(e)
-                    // this.isErrorUsr = true
-                    // this.isErrorPasswd = true
-                })
+                HTTP.post(`/registration`, register)
+                    .then(response => {
+                        // JSON responses are automatically parsed.
+                        console.log(response.status)
+                    })
+                    .catch(e => {
+                        console.log(e)
+                    })
+            }else{
+                this.snackbar = true
+            }
+        },
+        clear() {
+            this.$refs.form.reset()
         }
     }
 }
