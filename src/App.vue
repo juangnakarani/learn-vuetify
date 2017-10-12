@@ -1,5 +1,6 @@
 <template>
   <v-app id="inspire" light>
+
     <v-navigation-drawer app clipped v-model="drawer" width="200" temporary dark>
       <v-list dense>
         <v-list-tile v-if="islogin" @click="dialog = true">
@@ -68,6 +69,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
+
     <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Ayo rek ngeVuetify!</v-toolbar-title>
@@ -86,7 +88,7 @@
           <v-dialog v-model="dialog">
             <v-card>
               <v-card-title class="headline">Apakah Anda benar ingin logout?</v-card-title>
-              <v-card-text>Dalam proses logout ini state di vuex akan dikosong kan.</v-card-text>
+              <v-card-text>Dalam proses logout ini state di vuex akan dikosongkan.</v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="green" flat="flat" @click.native="goToLoginOut">Yes</v-btn>
@@ -123,7 +125,7 @@ export default {
       router.push({ path: '/' })
     },
     guest: function() {
-      router.push({ path: '/guest' })
+      router.push({ path: '/guest' }) 
     },
     settings: function() {
       router.push({ path: '/settings' })

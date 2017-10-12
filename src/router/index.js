@@ -56,6 +56,12 @@ export default new Router({
       name: 'ErrorPage',
       component: ErrorPage,
       props: true
+    },
+    {
+      path: '*',
+      name: 'ErrorPage404',
+      component: ErrorPage,
+      props: true
     }
   ]
 })
