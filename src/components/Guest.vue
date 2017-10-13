@@ -3,8 +3,7 @@
          <v-layout justify-center align-content-center>
                 <img src='../assets/guest.png' />
         </v-layout>
-        <v-layout justify-center>
-            
+        <v-layout justify-center>            
             <v-card color="green" dark>
               <v-card-text 
               v-text="lorem">

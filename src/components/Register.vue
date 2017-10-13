@@ -1,7 +1,7 @@
 <template>
     <v-container grid-list-md>
         <v-snackbar :top="y === 'top'" :timeout="timeout" :color="color" :multi-line="mode === 'multi-line'" :vertical="mode === 'vertical'" v-model="snackbar">
-            {{ text }}
+            {{ snackbartext }}
             <v-btn dark flat @click.native="snackbar = false">OK</v-btn>
         </v-snackbar>
         <v-layout justify-center align-content-center>
@@ -122,10 +122,10 @@ export default {
         ],
         snackbar: false,
         y: 'top',
-        color: 'red',
+        color: '',
         mode: '',
         timeout: 6000,
-        text: 'Ups.. please check the incorrect input..!'
+        snackbartext: ''
     }),
     computed: {
         fixphone: function() {
@@ -156,15 +156,21 @@ export default {
                     .then(response => {
                         // JSON responses are automatically parsed.
                         console.log(response.status)
+                        this.clear()
                     })
                     .catch(e => {
                         console.log(e)
                     })
             }else{
+                this.color = 'red'
+                this.snackbartext = "Ups.. please check the incorrect input..!"
                 this.snackbar = true
             }
         },
         clear() {
+            this.color = 'green'
+                this.snackbartext = "Input success.."
+                this.snackbar = true
             this.$refs.form.reset()
         }
     }
