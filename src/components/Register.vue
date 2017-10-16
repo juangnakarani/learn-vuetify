@@ -161,16 +161,16 @@ export default {
                     .catch(e => {
                         console.log(e)
                     })
-            }else{
+            } else {
                 this.color = 'red'
-                this.snackbartext = "Ups.. please check the incorrect input..!"
+                this.snackbartext = "Oops.. please check the incorrect input..!"
                 this.snackbar = true
             }
         },
         clear() {
             this.color = 'green'
-                this.snackbartext = "Input success.."
-                this.snackbar = true
+            this.snackbartext = "Input success.."
+            this.snackbar = true
             this.$refs.form.reset()
         }
     }

@@ -10,8 +10,8 @@
       </v-flex>
     </v-layout>
     <!-- <v-flex lg6 xs6>
-              <v-spacer></v-spacer>
-            </v-flex> -->
+                  <v-spacer></v-spacer>
+                </v-flex> -->
     <v-layout justify-center align-content-center>
       <v-flex lg6 xs6>
         <!-- <v-layout justify-center> -->
@@ -20,25 +20,27 @@
             <td class="text-xs-right">{{ props.item.id }}</td>
             <td>
               <v-edit-dialog lazy> {{ props.item.filename }}
-                <v-text-field slot="input" label="Edit" v-model="props.item.name" single-line counter :rules="[max25chars]"></v-text-field>
+                <v-text-field slot="input" label="Edit" v-model="props.item.filename" single-line counter :rules="[max25chars]"></v-text-field>
               </v-edit-dialog>
             </td>
 
             <td class="text-xs-right">{{ props.item.uploadby }}</td>
-            <td class="text-xs-right">{{ props.item.datecreated }}</td>
+            <td class="text-xs-right">{{ props.item.date }}</td>
             <td class="text-xs-right">{{ props.item.size }}</td>
-            <td class="text-xs-right">{{ props.item.link }}</td>
             <td class="text-xs-right">
-              <!-- <v-edit-dialog @open="tmp = props.item.iron" @save="props.item.iron = tmp || props.item.iron" large lazy>
-                                              <div>{{ props.item.iron }}</div>
-                                              <div slot="input" class="mt-3 title">Update Iron</div>
-                                              <v-text-field slot="input" label="Edit" v-model="tmp" single-line counter autofocus :rules="[max25chars]"></v-text-field>
-                                          </v-edit-dialog> -->
+              <v-btn color="primary">Download</v-btn>
             </td>
+            <!-- <td class="text-xs-center">
+              <!-- <v-edit-dialog @open="tmp = props.item.iron" @save="props.item.iron = tmp || props.item.iron" large lazy>
+                                                  <div>{{ props.item.iron }}</div>
+                                                  <div slot="input" class="mt-3 title">Update Iron</div>
+                                                  <v-text-field slot="input" label="Edit" v-model="tmp" single-line counter autofocus :rules="[max25chars]"></v-text-field>
+                                              </v-edit-dialog>
+            </td> -->
           </template>
           <!-- <template slot="pageText" scope="{ pageStart, pageStop }">
-                                      From {{ pageStart }} to {{ pageStop }}
-                                  </template> -->
+                                          From {{ pageStart }} to {{ pageStop }}
+                                      </template> -->
         </v-data-table>
         <!-- </v-layout> -->
       </v-flex>
@@ -47,6 +49,8 @@
   </v-container>
 </template>
 <script>
+import { HTTP } from '@/router/index'
+
 export default {
   data: () => ({
     lorem: `List download file`,
@@ -69,7 +73,30 @@ export default {
       { text: 'Size', value: 'protein' },
       { text: 'Action', value: 'sodium' },
     ],
-    items: []
-  })
+    items: [],
+    loading: false,
+  }),
+  created: function() {
+    HTTP.get(`/listdownload`, {
+      withCredentials: false,
+      timeout: 1000,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+      // params: {
+      //   limit: 3,
+      //   offset: 1
+      // }
+    })
+      .then(response => {
+        // JSON responses are automatically parsed.
+        console.log(response)
+        this.items = response.data
+        // this.pagination.page = 1
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  }
 }
 </script>

@@ -7,7 +7,7 @@ import Guest from '@/components/Guest'
 import Settings from '@/components/Settings'
 import Register from '@/components/Register'
 import ListPersons from '@/components/ListPersons'
-import UploadPersons from '@/components/UploadPersons'
+import Upload from '@/components/Upload'
 import Download from '@/components/Download'
 import ErrorPage from '@/components/ErrorPage'
 
@@ -43,8 +43,8 @@ export default new Router({
     },
     {
       path: '/upload',
-      name: 'UploadPersons',
-      component: UploadPersons
+      name: 'Upload',
+      component: Upload
     },
     {
       path: '/download',
