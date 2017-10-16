@@ -35,3 +35,8 @@ let fd = new FormData();
 fd.append('file',file)
 ```
 
+## install filesaver
+```javascript
+npm install file-saver --save
+```
+

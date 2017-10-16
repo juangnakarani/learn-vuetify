@@ -10,8 +10,8 @@
       </v-flex>
     </v-layout>
     <!-- <v-flex lg6 xs6>
-                  <v-spacer></v-spacer>
-                </v-flex> -->
+                          <v-spacer></v-spacer>
+                        </v-flex> -->
     <v-layout justify-center align-content-center>
       <v-flex lg6 xs6>
         <!-- <v-layout justify-center> -->
@@ -28,19 +28,19 @@
             <td class="text-xs-right">{{ props.item.date }}</td>
             <td class="text-xs-right">{{ props.item.size }}</td>
             <td class="text-xs-right">
-              <v-btn color="primary">Download</v-btn>
+              <v-btn color="primary" @click="download(props.item.filename)">Download</v-btn>
             </td>
             <!-- <td class="text-xs-center">
-              <!-- <v-edit-dialog @open="tmp = props.item.iron" @save="props.item.iron = tmp || props.item.iron" large lazy>
-                                                  <div>{{ props.item.iron }}</div>
-                                                  <div slot="input" class="mt-3 title">Update Iron</div>
-                                                  <v-text-field slot="input" label="Edit" v-model="tmp" single-line counter autofocus :rules="[max25chars]"></v-text-field>
-                                              </v-edit-dialog>
-            </td> -->
+                      <!-- <v-edit-dialog @open="tmp = props.item.iron" @save="props.item.iron = tmp || props.item.iron" large lazy>
+                                                          <div>{{ props.item.iron }}</div>
+                                                          <div slot="input" class="mt-3 title">Update Iron</div>
+                                                          <v-text-field slot="input" label="Edit" v-model="tmp" single-line counter autofocus :rules="[max25chars]"></v-text-field>
+                                                      </v-edit-dialog>
+                    </td> -->
           </template>
           <!-- <template slot="pageText" scope="{ pageStart, pageStop }">
-                                          From {{ pageStart }} to {{ pageStop }}
-                                      </template> -->
+                                                  From {{ pageStart }} to {{ pageStop }}
+                                              </template> -->
         </v-data-table>
         <!-- </v-layout> -->
       </v-flex>
@@ -74,8 +74,37 @@ export default {
       { text: 'Action', value: 'sodium' },
     ],
     items: [],
-    loading: false,
+    loading: false
   }),
+  methods: {
+    download: function(param) {
+      HTTP.get(`/downloadlink`, {
+        withCredentials: false,
+        timeout: 1000,
+        headers: {
+          // 'Content-Type': 'application/json'
+        },
+        params: {
+          filename: param
+        },
+        responseType:"blob"
+      })
+        .then(response => {
+          // JSON responses are automatically parsed.
+          console.log(response);
+          // this.items = response.data;
+          var FileSaver = require('file-saver');
+          let blob = new Blob([response.data],{responseType:"blob"});
+          FileSaver.saveAs(blob, param);
+          // var url = window.URL.createObjectURL(blob);
+
+          // window.open(url);
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    }
+  },
   created: function() {
     HTTP.get(`/listdownload`, {
       withCredentials: false,
@@ -83,6 +112,7 @@ export default {
       headers: {
         'Content-Type': 'application/json'
       }
+      // TODO implement the pagination for next stuff
       // params: {
       //   limit: 3,
       //   offset: 1
